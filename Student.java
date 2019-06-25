@@ -93,12 +93,20 @@ public class Student {
       * @return isEquals - Whether or not the two ID's are equal
    */
    public boolean equals (Student other) {
-      boolean isEqual = (this.getID()).equals(other.getID());
-      isEqual = (this.getFirstName()).equals(other.getFirstName());
-      isEqual = (this.getLastName()).equals(other.getLastName());
-      isEqual = (this.getEmail()).equals(other.getEmail());
+      if (this.getID().equals(other.getID())) {
+         return true;
+      }
+      if (this.getFirstName().equals(other.getFirstName())) {
+         return true;
+      }
+      if (this.getLastName().equals(other.getLastName())) {
+         return true;
+      }
+      if (this.getEmail().equals(other.getEmail())) {
+         return true; 
+      }
             
-      return isEqual;
+      return false;
    } // End of equals.
 //*****************************************************************************************
 

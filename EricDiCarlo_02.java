@@ -4,12 +4,20 @@ import java.io.*;
 
 public class EricDiCarlo_02 {
 
-   private List listOfStudents; // A list for all valid Student objects
-   private List listOfGradeItems; // A list for all valid GradeItem objects
-   private final String INPUT_FILE = "Project_03_Input01.txt"; // Input file to be fed into lists
-   private final String OUTPUT_FILE = "Project_03_Output01.txt"; // Output file for lists   
+   private static List listOfStudents; // A list for all valid Student objects
+   private static List listOfGradeItems; // A list for all valid GradeItem objects
+   private static final String INPUT_FILE = "Project_03_Input01.txt"; // Input file to be fed into lists
+   private static final String OUTPUT_FILE = "Project_03_Output01.txt"; // Output file for lists   
+   
+   private static File inputFile;
+   private static Scanner input;
+   
+//****************************************************************************************
 
    public static void main(String[] args) throws IOException {
+   
+   File inputFile = new File(INPUT_FILE);
+   Scanner input = new Scanner(inputFile);
       
       System.out.println("Reading data from file Project_03_Input01.txt");
       while(input.hasNext()) {
@@ -25,17 +33,15 @@ public class EricDiCarlo_02 {
       * processInput() - Processes the date from the input file and directs it depened on object type.
    */
    public static void processInput() {
-      File inputFile = new File(INPUT_FILE);
-      Scanner input = new Scanner(inputFile);
       
       String tempString = input.nextLine();
       String[] tempArray = tempString.split(",");
       
-      if (tempArray[0].equals("STUDENT") {
-         processStudentData(String[] tempArray);
+      if (tempArray[0].equals("STUDENT")) {
+         processStudentData(tempArray);
       }
-      else if(tempArray[0].equals("GRADE ITEM") {
-         processGradeItemData(String[] tempArray);
+      else if(tempArray[0].equals("GRADE ITEM")) {
+         processGradeItemData(tempArray);
       }
       else {
          throw new IllegalArgumentException("Please input data for either a Student or Grade Item.");
@@ -50,7 +56,7 @@ public class EricDiCarlo_02 {
    public static void processStudentData(String[] data) {
       if(data[1].equals("ADD")) {
          Student student = new Student(data[2], data[3], data[4], data[5]);
-         if (listOfStudents.contains(student.getID()) {
+         if (listOfStudents.contains(student)) {
             throw new IllegalArgumentException("The entered Student ID already exists.");  
          }
          else {
@@ -58,7 +64,7 @@ public class EricDiCarlo_02 {
                listOfStudents.add(student);
                System.out.println("Student with Student Id " + student.getID() + " was added to the list.");
             }
-            catch (0) {
+            catch (IllegalArgumentException e) {
                System.err.println("The student could not be added to the list.");
             }
          }         
@@ -74,7 +80,7 @@ public class EricDiCarlo_02 {
          }
       }
       else {
-         throw new IllegalArgumentException("The task requested does not exist."
+         throw new IllegalArgumentException("The task requested does not exist.");
       }
    }
 //*****************************************************************************************   
