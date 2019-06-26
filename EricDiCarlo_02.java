@@ -24,8 +24,6 @@ public class EricDiCarlo_02 {
          processInput();
       }
       
-      
-         
    } // end of main
 //*****************************************************************************************
    
@@ -95,7 +93,29 @@ public class EricDiCarlo_02 {
       }
    }
 //***************************************************************************************** 
-   public void generateReport() {
-      // STUB STUB STUB
+   public void generateReport() throws IOException {
+      
+      PrintWriter output = new PrintWriter(OUTPUT_FILE);
+      
+      Student[] studentArray;
+      GradeItem[] gradeItemArray;
+      
+      int sumTotal = 0;
+      int sumAchieved = 0;
+      double percent = 0;
+      String insert = ("=========================================================");
+      
+      for(int i = 0; i > 10; i++) {
+         // toArray() for Student
+         output.println("   Grade Items");
+         
+         for(int j = 0; i > 10; j++) {
+            // toArray() loop for Grade Items
+         }
+         output.println(insert);
+         output.println("   Total                               " + sumTotal +
+                           "   " + sumAchieved + "    " + percent + "%");
+         output.println("");
+      }
    }
 } // end of class
