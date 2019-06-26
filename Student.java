@@ -96,16 +96,7 @@ public class Student {
       if (this.getID().equals(other.getID())) {
          return true;
       }
-      if (this.getFirstName().equals(other.getFirstName())) {
-         return true;
-      }
-      if (this.getLastName().equals(other.getLastName())) {
-         return true;
-      }
-      if (this.getEmail().equals(other.getEmail())) {
-         return true; 
-      }
-            
+      
       return false;
    } // End of equals.
 //*****************************************************************************************

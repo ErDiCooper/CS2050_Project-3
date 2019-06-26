@@ -1,30 +1,26 @@
 public class List<T> implements MyCollectionInterface<T> {
 
-   public Node firstNode; // 
+   public Node firstNode; 
    
    public List() {
       firstNode = null;
    } // End of List constructor.
 
 //*****************************************************************************************
-
-   public boolean isEmpty() {
-      return(firstNode == null);
-   }
    
-//*****************************************************************************************
-   
-   public void add(T data) {
-      Node newNode = new Node(data);
+   public boolean add(T newItem) {
+      Node newNode = new Node(newItem);
       Node currentNode = firstNode;
       if (firstNode == null) {
-         addAtFirst(data);
+         addAtFirst(newItem);
+         return true;
       }
       else {
-         while(currentNode.next != null) {
+         while (currentNode.next != null) {
             currentNode = currentNode.next;
          }
-         currentNode.next = newNode;
+            currentNode.next = newNode;
+            return true;
       }
    }
    
@@ -42,14 +38,14 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
-
-
-   public void remove(T data) {
+   public boolean remove(T anEntry) {
       Node currentNode = firstNode;
       Node previousNode = firstNode;
+      boolean matchFound = false;
       
-      while(!currentNode.getData().equals(data)) {
-         if(currentNode.next == null) {
+      while (currentNode.next != null) {
+         if (currentNode.getData().equals(anEntry)) {
+            matchFound = true;
             break;
          }
          else {
@@ -58,15 +54,73 @@ public class List<T> implements MyCollectionInterface<T> {
          }
       }
       
-      if(currentNode == firstNode) {
-         firstNode = firstNode.next;
+      if (matchFound) {
+         if(currentNode == firstNode) {
+            firstNode = firstNode.next;
+            return matchFound;
+         }
+         else {
+            previousNode.next = currentNode.next;
+            return matchFound;
+         }
       }
-      else {
-         previousNode.next = currentNode.next;
-      }
+      return matchFound;
    }
    
 //*****************************************************************************************
+
+   public void clear() {
+      if(!isEmpty()) {
+         System.out.println("The List is already empty.");
+      }
+      firstNode.next = null;
+      firstNode = null;
+   }
+
+//*****************************************************************************************
+
+   public int getCurrentSize() {
+      int counter = 0;
+      Node currentNode = firstNode;
+      
+      if (firstNode == null) {
+         return counter;
+      }
+      if (firstNode.next == null) {
+         return 1;
+      }
+      
+      while (currentNode.next != null) {
+         counter++;
+         currentNode = currentNode.next;
+      }
+      
+      return counter;
+   }
+
+//*****************************************************************************************
+
+   public boolean isEmpty() {
+      return getCurrentSize() == 0;      
+   }
+
+//*****************************************************************************************
+
+   public int getFrequencyOf(T anEntry) {
+      int counter = 0;
+      Node currentNode = firstNode;
+      
+      while(currentNode.next != null) {
+         if(currentNode.getData().equals(anEntry)) {
+            counter++;
+         }
+         currentNode = currentNode.next;
+      }
+      
+      return counter;
+   }
+   
+//*****************************************************************************************   
 
    public boolean contains (T data) {
       Node currentNode = firstNode;
@@ -85,7 +139,7 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
-   public void toArray () {
+   public Object[] toArray () {
       // STUB STUB STUB
    }
 //*****************************************************************************************

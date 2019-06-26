@@ -151,15 +151,6 @@ public class GradeItem {
       if((this.getGradeItemID()) == (other.getGradeItemID())) {
          isEqual = true;
       };
-      isEqual = (this.getCourseID()).equals(other.getCourseID());
-      isEqual = (this.getItemType()).equals(other.getItemType());
-      isEqual = (this.getDate()).equals(other.getDate());
-      if((this.getMaxScore()) == (other.getMaxScore())) {
-         isEqual = true;
-      };
-      if((this.getActualScore()) == (other.getActualScore())) {
-         isEqual = true;
-      };
             
       return isEqual;
    } // End of equals.
