@@ -78,6 +78,6 @@ public interface MyCollectionInterface<T> {
     * @return A newly allocated array of all the entries in the collection. 
     * Note: If the collection is empty, the returned array is empty.
     */
-   public Object[] toArray ();
+   public T[] toArray ();
 
 }

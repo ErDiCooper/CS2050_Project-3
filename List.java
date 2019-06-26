@@ -1,10 +1,19 @@
 public class List<T> implements MyCollectionInterface<T> {
 
-   public Node firstNode; 
+   private Node firstNode;
+   private int numberOfEntries; 
    
    public List() {
-      firstNode = null;
+      initializeDataFields();
    } // End of List constructor.
+
+//*****************************************************************************************
+
+   public void initializeDataFields() {
+      firstNode = null;
+      numberOfEntries = 0;
+   } // End of initializeDataFields.
+   
 
 //*****************************************************************************************
    
@@ -17,12 +26,12 @@ public class List<T> implements MyCollectionInterface<T> {
       }
       else {
          while (currentNode.next != null) {
-            currentNode = currentNode.next;
+            currentNode = currentNode.getNext();
          }
             currentNode.next = newNode;
             return true;
       }
-   }
+   } // End of add.
    
 //*****************************************************************************************
    
@@ -34,7 +43,7 @@ public class List<T> implements MyCollectionInterface<T> {
       else {
          firstNode.next = newNode;
       }
-   }
+   } // End of addAtFirst.
 
 //*****************************************************************************************
 
@@ -43,29 +52,29 @@ public class List<T> implements MyCollectionInterface<T> {
       Node previousNode = firstNode;
       boolean matchFound = false;
       
-      while (currentNode.next != null) {
+      while (currentNode != null) {
          if (currentNode.getData().equals(anEntry)) {
             matchFound = true;
             break;
          }
          else {
             previousNode = currentNode;
-            currentNode = currentNode.next;
+            currentNode = currentNode.getNext();
          }
       }
       
       if (matchFound) {
          if(currentNode == firstNode) {
-            firstNode = firstNode.next;
+            firstNode = firstNode.getNext();
             return matchFound;
          }
          else {
-            previousNode.next = currentNode.next;
+            previousNode.next = currentNode.getNext();
             return matchFound;
          }
       }
       return matchFound;
-   }
+   } // End of remove.
    
 //*****************************************************************************************
 
@@ -75,7 +84,7 @@ public class List<T> implements MyCollectionInterface<T> {
       }
       firstNode.next = null;
       firstNode = null;
-   }
+   } // End of clear.
 
 //*****************************************************************************************
 
@@ -86,23 +95,23 @@ public class List<T> implements MyCollectionInterface<T> {
       if (firstNode == null) {
          return counter;
       }
-      if (firstNode.next == null) {
+      if (firstNode.getNext() == null) {
          return 1;
       }
       
-      while (currentNode.next != null) {
+      while (currentNode != null) {
          counter++;
-         currentNode = currentNode.next;
+         currentNode = currentNode.getNext();
       }
       
       return counter;
-   }
+   } // End of getCurrentSize.
 
 //*****************************************************************************************
 
    public boolean isEmpty() {
       return getCurrentSize() == 0;      
-   }
+   } // End of isEmpty.
 
 //*****************************************************************************************
 
@@ -110,15 +119,15 @@ public class List<T> implements MyCollectionInterface<T> {
       int counter = 0;
       Node currentNode = firstNode;
       
-      while(currentNode.next != null) {
+      while(currentNode != null) {
          if(currentNode.getData().equals(anEntry)) {
             counter++;
          }
-         currentNode = currentNode.next;
+         currentNode = currentNode.getNext();
       }
       
       return counter;
-   }
+   } // End of getFrequencyOf.
    
 //*****************************************************************************************   
 
@@ -130,18 +139,29 @@ public class List<T> implements MyCollectionInterface<T> {
             return true;
          }
          else {
-            currentNode = currentNode.next;
+            currentNode = currentNode.getNext();
          }       
-       } while (currentNode.next != null);
+       } while (currentNode.getNext() != null);
        
        return false;   
-   }
+   } // End of contains.
 
 //*****************************************************************************************
 
-   public Object[] toArray () {
-      // STUB STUB STUB
-   }
+   public T[] toArray () {
+      @SuppressWarnings("unchecked")
+      T[] result;
+      
+      int index = 0;
+      Node currentNode = firstNode;
+      while (currentNode != null) {
+         result[index] = currentNode.getData();
+         currentNode = currentNode.getNext();
+         index++;
+      }
+      
+      return result;
+   } // End of toArray.
 //*****************************************************************************************
 //*****************************************************************************************
 
@@ -151,16 +171,37 @@ public class List<T> implements MyCollectionInterface<T> {
    
       private Node(T dataPortion) {
          this(dataPortion, null);
-      } // End of constructor
+      } // End of first Node constructor.
+      
       private Node(T dataPortion, Node<T> nextNode) {
          data = dataPortion;
          next = nextNode;
-      }   
+      } // End of second Node constructor.   
       
 //*****************************************************************************************
+      
       private T getData() {
          return data;
-      }
+      } // End of getData.
+      
+//*****************************************************************************************
+
+      private void setData(T newData) {
+         data = newData;
+      } // End of setData.
+      
+//*****************************************************************************************
+
+      private Node getNext() {
+         return next;
+      } // End of getNext.
+      
+//*****************************************************************************************
+
+      private void setNext(Node<T> nextNode) {
+         next = nextNode;
+      } // End of setNext.
+      
    } // End of Node class.
 
 } // End of List class.
