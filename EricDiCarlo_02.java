@@ -61,7 +61,7 @@ public class EricDiCarlo_02 {
          else {
             try {
                listOfStudents.add(student);
-               System.out.println("Student with Student Id " + student.getID() + " was added to the list.");
+               System.out.println("Student with Student ID " + student.getID() + " was added to the list.");
             }
             catch (IllegalArgumentException e) {
                System.err.println("The student could not be added to the list.");
@@ -72,7 +72,7 @@ public class EricDiCarlo_02 {
          Student student = new Student(data[2], data[3], data[4], data[5]);
          try {
             listOfStudents.remove(student);
-            System.out.println("Student with Student Id " + student.getID() + " was removed from the list.");
+            System.out.println("Student with Student ID " + student.getID() + " was removed from the list.");
          }
          catch (IllegalArgumentException e) {
             System.err.println("The student requested does not exist in the list.");
@@ -89,10 +89,38 @@ public class EricDiCarlo_02 {
       * @param data - The array holding the data for gradeItem1
    */      
    public static void processGradeItemData(String[] data) {
-      if(data[0].equals("GRADE ITEM")) {
-         // STUB STUB STUB
+      if(data[1].equals("ADD")) {
+         GradeItem gradeItem = new GradeItem(data[2], data[3], data[4], data[5],
+                                             data[6], data[7], data[8]);
+         if (listOfGradeItems.contains(gradeItem)) {
+            throw new IllegalArgumentException("The entered Student ID already exists.");  
+         }
+         else {
+            try {
+               listOfGradeItems.add(gradeItem);
+               System.out.println("Assignment with GradeItem ID " + gradeItem.getGradeItemID() + " was added to the list.");
+            }
+            catch (IllegalArgumentException e) {
+               System.err.println("The GradeItem could not be added to the list.");
+            }
+         }         
       }
-   }
+      else if(data[1].equals("DEL")) {
+         GradeItem gradeItem = new GradeItem(data[2], data[3], data[4], data[5],
+                                             data[6], data[7], data[8]);
+         try {
+            listOfGradeItems.remove(gradeItem);
+            System.out.println("Assignment with GradeItem ID " + gradeItem.getGradeItemID() + 
+                               " was removed from the list.");
+         }
+         catch (IllegalArgumentException e) {
+            System.err.println("The GradeItem requested does not exist in the list.");
+         }
+      }
+      else {
+         throw new IllegalArgumentException("The task requested does not exist.");
+      }
+   }  
 //*****************************************************************************************
 
    /**
@@ -105,25 +133,61 @@ public class EricDiCarlo_02 {
       PrintWriter output = new PrintWriter(new FileWriter(OUTPUT_FILE));
       
       Object[] studentList = listOfStudents.toArray();
-      GradeItem[] gradeItemArray;
+      Object[] gradeItemList = listOfGradeItems.toArray();
       
       int sumTotal = 0;
       int sumAchieved = 0;
-      double percent = 0;
+      double percent = 0.0;
+      String idOne;
+      String idTwo;
+      
       String insert = ("=========================================================");
       
       for(int i = 0; i < studentList.length; i++) {
          Student student = (Student)studentList[i];
-         output.println(student.getID());
-         // output.println("   Grade Items");
-
-        /* for(int j = 0; i > 10; j++) {
-            // toArray() loop for Grade Items
+         idOne = student.getID();
+         output.println(student.getID() + "  " + student.getFirstName() + " " +
+                        student.getLastName() + " " + student.getEmail());
+         output.println("   Grade Items");
+         for(int j = 0; j < gradeItemList.length; j++) {
+            GradeItem gradeItem = (GradeItem)gradeItemList[j];
+            idTwo = gradeItem.getID();
+            
+            if (idOne.equals(idTwo)) {
+               sumTotal += gradeItem.getMaxScore();
+               sumAchieved += gradeItem.getActualScore();
+               
+               output.print("   " + gradeItem.getGradeItemID() + "   " +
+                              gradeItem.getCourseID() + "   ");
+                              
+               if ((gradeItem.getItemType()).equals("HW")) {
+                  output.print(gradeItem.getItemType() + "           ");
+               }
+               else if ((gradeItem.getItemType()).equals("Class Work")) {
+                  output.print(gradeItem.getItemType() + "   ");
+               }
+               else if ((gradeItem.getItemType()).equals("Test")) {
+                  output.print(gradeItem.getItemType() + "         ");
+               }
+               else if ((gradeItem.getItemType()).equals("Final")) {
+                  output.print(gradeItem.getItemType() + "        ");
+               }
+               output.print(gradeItem.getDate() + "   " + gradeItem.getMaxScore());
+               
+               if (gradeItem.getActualScore() < 100) {
+                  output.print("    " + gradeItem.getActualScore() + "\n");
+               }
+               else if (gradeItem.getActualScore() > 99) {
+                  output.print("   " + gradeItem.getActualScore() + "\n");
+               }
+            }
          } 
          output.println(insert);
          output.println("   Total                               " + sumTotal +
                            "   " + sumAchieved + "    " + percent + "%");
-         output.println(""); */
+         output.println("");
+         sumTotal = 0;
+         sumAchieved = 0;
       }
       output.close();
    }

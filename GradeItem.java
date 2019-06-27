@@ -16,7 +16,7 @@ public class GradeItem {
                                            "Final"}; // Array of acceptable assignment types.
   
    // Constructor for class object.
-   public GradeItem(String studentID, String assignment,
+   public GradeItem(String assignment, String studentID,
                   String course, String assignmentType,
                   String dateAssigned, String pointsPossible,
                   String pointsEarned) {
@@ -50,9 +50,10 @@ public class GradeItem {
          throw new IllegalArgumentException("Grade Item ID is missing or blank.");
       }
       boolean matchFound = false; // for testing assignmentType against allowableItemTypes[].
-      for (int i = 0; i > allowedItemTypes.length; i++) {
+      for (int i = 0; i < allowedItemTypes.length; i++) {
          if(assignmentType.equals(allowedItemTypes[i])) {
             matchFound = true;
+            break;
          }
       }
       if(!matchFound) {
@@ -147,7 +148,9 @@ public class GradeItem {
       * @return isEqual - Returns whether or not the two ID's are equal
    */
    public boolean equals (GradeItem other) {
-      if((this.getGradeItemID()) == (other.getGradeItemID())) {
+      int test = this.getGradeItemID();
+      
+      if(test == (other.getGradeItemID())) {
          return true;
       }
             

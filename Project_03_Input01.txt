@@ -1,2 +1,3 @@
 STUDENT,ADD,900123456,Joe,Doe,joedoe@msudenver.edu
 STUDENT,ADD,900548034,Barbara,Rafferty,brafferty@msudenver.edu
+GRADE ITEM,ADD,1,900123456,23456,HW,20190112,100,95
