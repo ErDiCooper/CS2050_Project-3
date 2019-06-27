@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
+import java.text.DecimalFormat;
 
 public class EricDiCarlo_02 {
 
@@ -135,6 +136,8 @@ public class EricDiCarlo_02 {
       Object[] studentList = listOfStudents.toArray();
       Object[] gradeItemList = listOfGradeItems.toArray();
       
+      DecimalFormat pointZero = new DecimalFormat("##0.0%");
+      
       int sumTotal = 0;
       int sumAchieved = 0;
       double percent = 0.0;
@@ -181,13 +184,15 @@ public class EricDiCarlo_02 {
                   output.print("   " + gradeItem.getActualScore() + "\n");
                }
             }
-         } 
-         output.println(insert);
+         percent = (double)sumAchieved / sumTotal;
+         output.println(insert);         
          output.println("   Total                               " + sumTotal +
-                           "   " + sumAchieved + "    " + percent + "%");
+                        "   " + sumAchieved + "    " + pointZero.format(percent));
          output.println("");
+         
          sumTotal = 0;
          sumAchieved = 0;
+         }
       }
       output.close();
    }
