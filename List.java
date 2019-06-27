@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class List<T> implements MyCollectionInterface<T> {
 
-   private Node firstNode;
-   private int numberOfEntries; 
+   private Node firstNode;      // The starting point of the List
+   private int numberOfEntries; // The number nodes in the list.
    
    public List() {
       initializeDataFields();
@@ -84,7 +84,7 @@ public class List<T> implements MyCollectionInterface<T> {
       }
       
       if (matchFound) {
-         if(currentNode == firstNode) {
+         if (currentNode == firstNode) {
             firstNode = firstNode.getNext();
             return matchFound;
          }
@@ -93,7 +93,7 @@ public class List<T> implements MyCollectionInterface<T> {
             return matchFound;
          }
       }
-      return matchFound;
+      throw new IllegalArgumentException("The data to be removed could not be found.");
    } // End of remove.
    
 //*****************************************************************************************
@@ -102,7 +102,7 @@ public class List<T> implements MyCollectionInterface<T> {
     * Removes all entries from this collection.
     */
    public void clear() {
-      if(!isEmpty()) {
+      if (!isEmpty()) {
          System.out.println("The List is already empty.");
       }
       firstNode.next = null;
@@ -158,8 +158,8 @@ public class List<T> implements MyCollectionInterface<T> {
       int counter = 0;
       Node currentNode = firstNode;
       
-      while(currentNode != null) {
-         if(currentNode.getData().equals(anEntry)) {
+      while (currentNode != null) {
+         if (currentNode.getData().equals(anEntry)) {
             counter++;
          }
          currentNode = currentNode.getNext();
@@ -183,7 +183,7 @@ public class List<T> implements MyCollectionInterface<T> {
       Node currentNode = firstNode;
       
       while (currentNode != null) {
-         if(currentNode.getData().equals(anEntry)) {
+         if (currentNode.getData().equals(anEntry)) {
             return true;
          } else {
             currentNode = currentNode.getNext();
