@@ -175,6 +175,9 @@ public class EricDiCarlo_02 {
                else if ((gradeItem.getItemType()).equals("Final")) {
                   output.print(gradeItem.getItemType() + "        ");
                }
+               else if ((gradeItem.getItemType()).equals("Quiz")) {
+                  output.print(gradeItem.getItemType() + "         ");
+               }
                output.print(gradeItem.getDate() + "   " + gradeItem.getMaxScore());
                
                if (gradeItem.getActualScore() < 100) {
@@ -184,6 +187,7 @@ public class EricDiCarlo_02 {
                   output.print("   " + gradeItem.getActualScore() + "\n");
                }
             }
+         }
          percent = (double)sumAchieved / sumTotal;
          output.println(insert);         
          output.println("   Total                               " + sumTotal +
@@ -192,7 +196,6 @@ public class EricDiCarlo_02 {
          
          sumTotal = 0;
          sumAchieved = 0;
-         }
       }
       output.close();
    }

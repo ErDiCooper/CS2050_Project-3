@@ -73,7 +73,7 @@ public class List<T> implements MyCollectionInterface<T> {
       boolean matchFound = false;
       
       while (currentNode != null) {
-         if (currentNode.getData().equals(anEntry)) {
+         if (currentNode.getData() == (anEntry)) {
             matchFound = true;
             break;
          }
@@ -89,7 +89,7 @@ public class List<T> implements MyCollectionInterface<T> {
             return matchFound;
          }
          else {
-            previousNode.next = currentNode.getNext();
+            previousNode.next = currentNode.next;
             return matchFound;
          }
       }
