@@ -92,7 +92,13 @@ public class EricDiCarlo_02 {
          // STUB STUB STUB
       }
    }
-//***************************************************************************************** 
+//*****************************************************************************************
+
+   /**
+       * Generates a report based on arrays from both Lists
+       *
+       * param OUTPUT_FILE - the file that the report will be written upon.
+       */ 
    public void generateReport() throws IOException {
       
       PrintWriter output = new PrintWriter(OUTPUT_FILE);

@@ -17,6 +17,12 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
    
+   /**
+    * Adds a new entry to this collection if one already exists.
+    * 
+    * @param newItem The object to be added to the collection
+    * @return True if the addition is successful, or false if not.
+    */
    public boolean add(T newItem) {
       Node newNode = new Node(newItem);
       Node currentNode = firstNode;
@@ -35,6 +41,12 @@ public class List<T> implements MyCollectionInterface<T> {
    
 //*****************************************************************************************
    
+   /**
+    * Adds a new entry to this collection
+    * 
+    * @param newItem The object to be added to the collection
+    * @return True if the addition is successful, or false if not.
+    */
    public void addAtFirst(T data) {
       Node newNode = new Node(data);
       if (firstNode == null) {
@@ -47,6 +59,12 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
+   /**
+    * Removes one occurrence of a given entry from this collection.
+    *
+    * @param anEntry The entry to be removed.
+    * @return matchFound - true if the removal was successful, false if not.
+    */
    public boolean remove(T anEntry) {
       Node currentNode = firstNode;
       Node previousNode = firstNode;
@@ -78,6 +96,9 @@ public class List<T> implements MyCollectionInterface<T> {
    
 //*****************************************************************************************
 
+   /**
+    * Removes all entries from this collection.
+    */
    public void clear() {
       if(!isEmpty()) {
          System.out.println("The List is already empty.");
@@ -88,6 +109,11 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
+   /**
+    * Gets the current number of entries in this collection.
+    *
+    * @return counter - The integer number of entries currently in the collection.
+    */
    public int getCurrentSize() {
       int counter = 0;
       Node currentNode = firstNode;
@@ -109,12 +135,23 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
+   /**
+    * Check to see if the collection is empty.
+    *
+    * @return True if the collection is empty, or false if not.
+    */
    public boolean isEmpty() {
       return getCurrentSize() == 0;      
    } // End of isEmpty.
 
 //*****************************************************************************************
 
+   /**
+    * Counts the number of times a given entry appears in this collection.
+    *
+    * @param anEntry The entry to be counted.
+    * @return counter - The number of times anEntry appears in the collection.
+    */
    public int getFrequencyOf(T anEntry) {
       int counter = 0;
       Node currentNode = firstNode;
@@ -130,12 +167,18 @@ public class List<T> implements MyCollectionInterface<T> {
    } // End of getFrequencyOf.
    
 //*****************************************************************************************   
-
-   public boolean contains (T data) {
+   
+   /**
+    * Tests whether this collection contains a given entry.
+    *
+    * @param anEntry The entry to locate.
+    * @return True if the collection contains anEntry, or false if not.
+    */
+   public boolean contains (T anEntry) {
       Node currentNode = firstNode;
       
        do {
-         if (currentNode.getData().equals(data)) {
+         if (currentNode.getData().equals(anEntry)) {
             return true;
          }
          else {
@@ -148,6 +191,12 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
+   /**
+    * Retrieves all entries that are in this collection.
+    *
+    * @return result - A newly allocated array of all the entries in the collection. 
+    * Note: If the collection is empty, the returned array is empty.
+    */
    public Object[] toArray () {
    
       @SuppressWarnings("unchecked")
@@ -183,24 +232,44 @@ public class List<T> implements MyCollectionInterface<T> {
       
 //*****************************************************************************************
       
+      /**
+       * Gets data from the Node
+       *
+       * @return data
+       */
       private T getData() {
          return data;
       } // End of getData.
       
 //*****************************************************************************************
 
+      /**
+       * Sets new data for the node
+       *
+       * param newData - newData for the Node
+       */
       private void setData(T newData) {
          data = newData;
       } // End of setData.
       
 //*****************************************************************************************
 
+      /**
+       * Gets the next Node.
+       *
+       * @return next
+       */
       private Node getNext() {
          return next;
       } // End of getNext.
       
 //*****************************************************************************************
 
+      /**
+       * Sets a new next Node.
+       *
+       * @param nextNode - the new next Node.
+       */
       private void setNext(Node<T> nextNode) {
          next = nextNode;
       } // End of setNext.
