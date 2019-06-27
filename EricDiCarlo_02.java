@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.io.*;
 
 public class EricDiCarlo_02 {
@@ -9,20 +9,16 @@ public class EricDiCarlo_02 {
    private static final String INPUT_FILE = "Project_03_Input01.txt"; // Input file to be fed into lists
    private static final String OUTPUT_FILE = "Project_03_Output01.txt"; // Output file for lists   
    
-   private static File inputFile;
-   private static Scanner input;
-   
 //****************************************************************************************
 
    public static void main(String[] args) throws IOException {
    
-   File inputFile = new File(INPUT_FILE);
-   Scanner input = new Scanner(inputFile);
+   listOfStudents = new List();
+   listOfGradeItems = new List();
       
       System.out.println("Reading data from file Project_03_Input01.txt");
-      while(input.hasNext()) {
-         processInput();
-      }
+      processInput();
+      generateReport();
       
    } // end of main
 //*****************************************************************************************
@@ -30,19 +26,24 @@ public class EricDiCarlo_02 {
    /**
       * processInput() - Processes the date from the input file and directs it depened on object type.
    */
-   public static void processInput() {
+   public static void processInput() throws IOException {
+   
+      File inputFile = new File(INPUT_FILE);
+      Scanner input = new Scanner(inputFile);
       
-      String tempString = input.nextLine();
-      String[] tempArray = tempString.split(",");
+      while(input.hasNext()) {
+         String tempString = input.nextLine();
+         String[] tempArray = tempString.split(",");
       
-      if (tempArray[0].equals("STUDENT")) {
-         processStudentData(tempArray);
-      }
-      else if(tempArray[0].equals("GRADE ITEM")) {
-         processGradeItemData(tempArray);
-      }
-      else {
-         throw new IllegalArgumentException("Please input data for either a Student or Grade Item.");
+         if (tempArray[0].equals("STUDENT")) {
+            processStudentData(tempArray);
+         }
+         else if(tempArray[0].equals("GRADE ITEM")) {
+            processGradeItemData(tempArray);
+         }
+         else {
+            throw new IllegalArgumentException("Please input data for either a Student or Grade Item.");
+         }
       }
    }
 //*****************************************************************************************   
@@ -99,11 +100,11 @@ public class EricDiCarlo_02 {
        *
        * param OUTPUT_FILE - the file that the report will be written upon.
        */ 
-   public void generateReport() throws IOException {
+   public static void generateReport() throws IOException {
       
-      PrintWriter output = new PrintWriter(OUTPUT_FILE);
+      PrintWriter output = new PrintWriter(new FileWriter(OUTPUT_FILE));
       
-      Student[] studentArray;
+      Object[] studentList = listOfStudents.toArray();
       GradeItem[] gradeItemArray;
       
       int sumTotal = 0;
@@ -111,17 +112,19 @@ public class EricDiCarlo_02 {
       double percent = 0;
       String insert = ("=========================================================");
       
-      for(int i = 0; i > 10; i++) {
-         // toArray() for Student
-         output.println("   Grade Items");
-         
-         for(int j = 0; i > 10; j++) {
+      for(int i = 0; i < studentList.length; i++) {
+         Student student = (Student)studentList[i];
+         output.println(student.getID());
+         // output.println("   Grade Items");
+
+        /* for(int j = 0; i > 10; j++) {
             // toArray() loop for Grade Items
-         }
+         } 
          output.println(insert);
          output.println("   Total                               " + sumTotal +
                            "   " + sumAchieved + "    " + percent + "%");
-         output.println("");
+         output.println(""); */
       }
+      output.close();
    }
 } // end of class

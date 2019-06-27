@@ -5,6 +5,9 @@
  * @author Dr. Salim Lakhani
  * @version 1.1, 2017, February 7
  */
+ 
+import java.util.ArrayList;
+ 
 public interface MyCollectionInterface<T> {
    
    /**

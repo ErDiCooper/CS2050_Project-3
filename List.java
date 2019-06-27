@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class List<T> implements MyCollectionInterface<T> {
 
    private Node firstNode;
@@ -175,17 +177,18 @@ public class List<T> implements MyCollectionInterface<T> {
     * @return True if the collection contains anEntry, or false if not.
     */
    public boolean contains (T anEntry) {
+      if (firstNode == null) {
+         return false;
+      }
       Node currentNode = firstNode;
       
-       do {
-         if (currentNode.getData().equals(anEntry)) {
+      while (currentNode != null) {
+         if(currentNode.getData().equals(anEntry)) {
             return true;
-         }
-         else {
+         } else {
             currentNode = currentNode.getNext();
-         }       
-       } while (currentNode.getNext() != null);
-       
+         }
+      }
        return false;   
    } // End of contains.
 
