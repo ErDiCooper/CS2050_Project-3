@@ -147,12 +147,11 @@ public class GradeItem {
       * @return isEqual - Returns whether or not the two ID's are equal
    */
    public boolean equals (GradeItem other) {
-      boolean isEqual = (this.getID()).equals(other.getID());
       if((this.getGradeItemID()) == (other.getGradeItemID())) {
-         isEqual = true;
-      };
+         return true;
+      }
             
-      return isEqual;
+      return false;
    } // End of equals.
 //*****************************************************************************************
 
