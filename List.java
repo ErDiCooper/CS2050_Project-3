@@ -148,11 +148,13 @@ public class List<T> implements MyCollectionInterface<T> {
 
 //*****************************************************************************************
 
-   public T[] toArray () {
+   public Object[] toArray () {
+   
       @SuppressWarnings("unchecked")
-      T[] result;
-      
+      int size = getCurrentSize();
+      Object[] result = new Object[size];
       int index = 0;
+      
       Node currentNode = firstNode;
       while (currentNode != null) {
          result[index] = currentNode.getData();
@@ -162,6 +164,7 @@ public class List<T> implements MyCollectionInterface<T> {
       
       return result;
    } // End of toArray.
+   
 //*****************************************************************************************
 //*****************************************************************************************
 
